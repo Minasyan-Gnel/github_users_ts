@@ -18,7 +18,21 @@ module.exports = {
         extensions: [ '.tsx', '.ts', '.js' ]
     },
     optimization: {
-        minimize: process.env.NODE_ENV === "production"
+        minimize: process.env.NODE_ENV === "production",
+        splitChunks: {
+            automaticNameMaxLength: 20,
+            chunks: "all",
+            minSize: 30000,
+            maxSize: 0,
+            name: true,
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all'
+                }
+            }
+        }
     },
     module: {
         rules: [
